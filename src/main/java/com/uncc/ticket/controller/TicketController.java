@@ -52,13 +52,18 @@ public class TicketController {
 
     @RequestMapping(value = "/tickets/edit/{id}", method = RequestMethod.GET)
     public String editTicket(Model model,@PathVariable("id") Long id) {
-        // Code here
-        return "redirect:/"; //Remove this line
+        // Get the ticket passed in an add it to the model passed in
+        // This is very similar to adding a ticket, but instead we are
+        // adding a already existing one by finding it with the id passed.
+        model.addAttribute("ticket", ticketService.findById(id));
+        return "tickets/storeTicket";
+
     }
 
     @RequestMapping(value = "/tickets/delete/{id}", method = RequestMethod.GET)
     public String deleteTicket(@PathVariable("id") Long id) {
-        // Code here
+        // Delete the ID passed in our ticketService object.
+        ticketService.deleteById(id);
         return "redirect:/";
     }
 
